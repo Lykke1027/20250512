@@ -9,9 +9,11 @@ function setup() {
   video.size(400, 400);
   video.hide();
 
+  console.log("Loading Facemesh model...");
   facemesh = ml5.facemesh(video, modelReady);
   facemesh.on("predict", (results) => {
     predictions = results;
+    console.log(predictions); // 檢查預測結果
   });
 }
 
@@ -29,13 +31,19 @@ function drawFacemesh() {
     const keypoints = predictions[0].scaledMesh;
 
     stroke(255, 0, 0); // 紅色線條
-    strokeWeight(15); // 線條粗細
+    strokeWeight(15);   // 線條粗細
     noFill();
 
     beginShape();
     for (let i = 0; i < points.length; i++) {
-      const [x, y] = keypoints[points[i]];
-      vertex(x, y);
+      const index = points[i];
+      if (keypoints[index]) {
+        const [x, y] = keypoints[index];
+        console.log(`Point ${index}: (${x}, ${y})`); // 檢查每個點的座標
+        vertex(x, y);
+      } else {
+        console.log(`Invalid point index: ${index}`);
+      }
     }
     endShape(CLOSE); // 將最後一點與第一點連接
   }
