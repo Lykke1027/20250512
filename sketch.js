@@ -4,10 +4,10 @@ let predictions = [];
 const points = [409, 270, 269, 267, 0, 37, 39, 40, 185, 61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291];
 
 function setup() {
-  const canvas = createCanvas(400, 400);
+  const canvas = createCanvas(640, 480); // 修改畫布大小為 640x480
   canvas.position((windowWidth - width) / 2, (windowHeight - height) / 2); // 將畫布置中
   video = createCapture(VIDEO);
-  video.size(400, 400);
+  video.size(640, 480); // 修改攝影機大小為 640x480
   video.hide();
 
   console.log("Loading Facemesh model...");
@@ -32,7 +32,7 @@ function drawFacemesh() {
     const keypoints = predictions[0].scaledMesh;
 
     stroke(255, 0, 0); // 紅色線條
-    strokeWeight(15);   // 線條粗細
+    strokeWeight(5);   // 線條粗細
     noFill();
 
     beginShape();
@@ -52,7 +52,7 @@ function drawFacemesh() {
 
 function windowResized() {
   // 當視窗大小改變時，重新置中畫布
-  resizeCanvas(400, 400);
+  resizeCanvas(640, 480); // 修改畫布大小為 640x480
   const canvas = document.querySelector("canvas");
   canvas.style.position = "absolute";
   canvas.style.left = `${(windowWidth - width) / 2}px`;
