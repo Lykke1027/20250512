@@ -4,7 +4,8 @@ let predictions = [];
 const points = [409, 270, 269, 267, 0, 37, 39, 40, 185, 61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291];
 
 function setup() {
-  createCanvas(400, 400);
+  const canvas = createCanvas(400, 400);
+  canvas.position((windowWidth - width) / 2, (windowHeight - height) / 2); // 將畫布置中
   video = createCapture(VIDEO);
   video.size(400, 400);
   video.hide();
@@ -47,4 +48,13 @@ function drawFacemesh() {
     }
     endShape(CLOSE); // 將最後一點與第一點連接
   }
+}
+
+function windowResized() {
+  // 當視窗大小改變時，重新置中畫布
+  resizeCanvas(400, 400);
+  const canvas = document.querySelector("canvas");
+  canvas.style.position = "absolute";
+  canvas.style.left = `${(windowWidth - width) / 2}px`;
+  canvas.style.top = `${(windowHeight - height) / 2}px`;
 }
