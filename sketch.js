@@ -35,7 +35,7 @@ function drawFacemesh() {
 
     // 繪製嘴唇
     stroke(255, 0, 0); // 紅色線條
-    strokeWeight(15);   // 線條粗細
+    strokeWeight(5);   // 線條粗細
     noFill();
     beginShape();
     for (let i = 0; i < points.length; i++) {
